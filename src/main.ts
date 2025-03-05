@@ -17,6 +17,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:8082',
       'https://leadacademy-frontend.vercel.app/',
+      /\.vercel\.app$/,
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
