@@ -16,7 +16,7 @@ export class CoursesController {
     description: 'List of all courses',
     type: [CourseDto],
   })
-  findAll() {
+  findAllCourses() {
     return this.coursesService.findAll();
   }
 
@@ -28,7 +28,7 @@ export class CoursesController {
     description: 'Course found',
     type: CourseDto,
   })
-  findOne(@Param('id') id: string) {
+  findOneCourse(@Param('id') id: string) {
     return this.coursesService.findOne(id);
   }
 }
