@@ -14,9 +14,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { rawBody: true });
 
   app.enableCors({
-    origin: '*',
+    origin: [
+      'http://localhost:8082',
+      'https://leadacademy-frontend.vercel.app/',
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
   });
-
   app.setGlobalPrefix('api/v1');
 
   const config = new DocumentBuilder()
