@@ -24,7 +24,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   const config = new DocumentBuilder()
-    .setTitle('LeadAcademy API v1')
+    .setTitle('LeadAcademy API v1 Checkout')
     .setDescription('LeadAcademy API v1')
     .setVersion('V1')
     .addBearerAuth()
