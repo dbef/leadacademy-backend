@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from '@nestjs/swagger/dist';
 import { ValidationPipe } from '@nestjs/common';
+import { json, urlencoded } from 'express';
 
 Object.defineProperty(BigInt.prototype, 'toJSON', {
   get() {
@@ -12,7 +13,8 @@ Object.defineProperty(BigInt.prototype, 'toJSON', {
 });
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { rawBody: true });
-
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.enableCors({
     origin: [
       'http://localhost:8082',
