@@ -18,7 +18,10 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:8082',
-      'https://leadacademy-frontend.vercel.app/',
+      'https://leadacademy-frontend.vercel.app',
+      'https://staging.leadacademy.edu.ge',
+      'https://leadacademy-frontend-vmsd.vercel.app',
+      'https://leadacademy.edu.ge',
       /\.vercel\.app$/,
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
