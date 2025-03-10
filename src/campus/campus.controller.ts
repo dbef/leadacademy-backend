@@ -12,7 +12,7 @@ export class CampusController {
     description: 'Get all campuses',
     type: [CampusDto],
   })
-  findAll() {
+  findAllCampuses() {
     return this.campusService.findAll();
   }
 }
