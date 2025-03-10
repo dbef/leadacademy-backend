@@ -10,6 +10,7 @@ import { ApplicationModule } from './application/application.module';
 import { MailModule } from './mail/mail.module';
 import { CoursesModule } from './courses/courses.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { CampusModule } from './campus/campus.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { GalleryModule } from './gallery/gallery.module';
     MailModule,
     CoursesModule,
     GalleryModule,
+    CampusModule,
   ],
   controllers: [AppController],
   providers: [AppService],
