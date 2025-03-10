@@ -6,7 +6,7 @@ import { CampusDto } from '../admin/campus/dto/campus.dto';
 export class CampusService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(): Promise<CampusDto[]> {
+  async findAllCampuses(): Promise<CampusDto[]> {
     const campuses = await this.prisma.campus.findMany({
       include: {
         campus_file_assn: {
