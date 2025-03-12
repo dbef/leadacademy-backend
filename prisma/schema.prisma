@@ -192,7 +192,7 @@ model Application {
   student_dob        String
   student_gender     String
   program            String
-  potential_roommate String? // Nullable field
+  potential_roommate String? 
 
   // Medical Information
   alergens              String?
