@@ -3,13 +3,17 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { MailService } from '../../mail/mail.service';
 import { ApplicationDto } from './dto/application.dto';
 import { UpdateApplicationDtoAdmin } from './dto/update-application.dto';
-
+import * as argon2 from 'argon2';
 @Injectable()
 export class ApplicationsService {
   constructor(
     private prisma: PrismaService,
     private mailService: MailService,
   ) {}
+
+  generateRandom7DigitNumber(): number {
+    return Math.floor(1000000 + Math.random() * 9000000);
+  }
 
   async update(id: string, updateApplicationDto: UpdateApplicationDtoAdmin) {
     const foundedApplication = await this.prisma.application.findUnique({
@@ -53,13 +57,39 @@ export class ApplicationsService {
       },
     });
 
-    await this.mailService.sendApplicationPaymentMail(
-      foundedApplication.parent_email,
-      'https://google.com',
-      foundedApplication.course.title_en,
-      foundedApplication.course.start_date,
-      foundedApplication.parent_name,
-    );
+    if (updateApplicationDto.status === 'pending-payment') {
+      await this.mailService.sendApplicationPaymentMail(
+        foundedApplication.parent_email,
+        'https://google.com',
+        foundedApplication.course.title_en,
+        foundedApplication.course.start_date,
+        foundedApplication.parent_name,
+        foundedApplication.course.price,
+      );
+    }
+
+    if (updateApplicationDto.status === 'approved') {
+      const passwd = this.generateRandom7DigitNumber().toString();
+
+      const hashedPassword = await argon2.hash(passwd);
+
+      await this.prisma.user.create({
+        data: {
+          email: foundedApplication.student_email,
+          password: hashedPassword,
+        },
+      });
+
+      await this.mailService.sendConfirmation(
+        foundedApplication.parent_email,
+        'https://google.com',
+        foundedApplication.course.title_en,
+        foundedApplication.course.start_date,
+        foundedApplication.parent_name,
+        foundedApplication.student_email,
+        passwd,
+      );
+    }
 
     return {
       message: 'Application updated successfully',

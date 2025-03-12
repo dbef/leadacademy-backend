@@ -3,6 +3,7 @@ export const applicationSuccess = (
   courseName: string,
   courseStartDate: Date,
   parent_name: string,
+  price: number,
 ): string => {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -74,9 +75,9 @@ export const applicationSuccess = (
         <p>Dear <strong>${parent_name}</strong>,</p>
         <p>Thank you for registering for <strong>${courseName}</strong>. We are thrilled to have you onboard! 🎉</p>
         <p>The course begins on <strong>${courseStartDate}</strong>. We can't wait to get started!</p>
-        <p>To finalize your registration, please proceed with the payment below:</p>
-
-        <a class="button" href="${link}">Pay Now 💳</a>
+        <p>To finalize your registration, please proceed with the payment</p>
+ <p>Send course amount: ${price.toString()} ₾ to this IBAN CODE: NL86RABO6732807986 </p>
+  
     </div>
 
     <div class="footer">

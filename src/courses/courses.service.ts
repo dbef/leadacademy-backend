@@ -99,9 +99,7 @@ export class CoursesService {
           select: {
             application: {
               where: {
-                status: {
-                  not: 'rejected',
-                },
+                status: 'approved',
               },
             },
           },
