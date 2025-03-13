@@ -197,7 +197,6 @@ model Application {
   relationship_with_peers String?
   social_skills           String?
 
-  // Medical Information
   alergens                String?
   medicaments             String?
   diet_restrictions       String?
