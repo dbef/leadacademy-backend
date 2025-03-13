@@ -46,6 +46,13 @@ export class ApplicationService {
       potential_roommate,
       parent_gender,
       student_gender,
+      additional_comfort_info,
+      emergency_contact_name,
+      emergency_contact_phone,
+      emergency_relation,
+      relationship_with_peers,
+      social_skills,
+      special_needs,
     } = createApplicationDto;
 
     if (createApplicationDto.student_email) {
@@ -138,6 +145,13 @@ export class ApplicationService {
         student_name: student_name,
         student_phone: student_phone,
         student_pn: student_pn,
+        additional_comfort_info: additional_comfort_info,
+        emergency_contact_name: emergency_contact_name,
+        emergency_contact_phone: emergency_contact_phone,
+        emergency_relation: emergency_relation,
+        relationship_with_peers: relationship_with_peers,
+        social_skills: social_skills,
+        special_needs: special_needs,
         course: {
           connect: {
             course_id,
@@ -153,6 +167,16 @@ export class ApplicationService {
     if (!createdApplication) {
       throw new ConflictException('Application not created');
     }
+
+    await this.mailService.sendNotification(
+      'kberadze@gmail.com',
+      foundedCourse.title_ka,
+    );
+
+    await this.mailService.sendNotification(
+      'soso.guruli@gmail.com',
+      foundedCourse.title_ka,
+    );
 
     return {
       message: 'Application successfully created',

@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsOptional,
@@ -106,7 +106,7 @@ export class CreateApplicationDto {
   potential_roommate: string | null;
 
   // Medical Info
-  @ApiProperty({ description: 'Allergens', })
+  @ApiProperty({ description: 'Allergens' })
   @IsOptional()
   @IsString()
   alergens: string | null;
@@ -136,6 +136,62 @@ export class CreateApplicationDto {
   @IsOptional()
   @IsString()
   additional_info: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  special_needs: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  relationship_with_peers: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  social_skills: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  emergency_relation: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  emergency_contact_name: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  emergency_contact_phone: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  additional_comfort_info: string | null;
 
   @ApiProperty({ description: 'Medical Terms Agreement' })
   @IsBoolean()

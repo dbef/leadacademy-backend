@@ -152,6 +152,62 @@ export class ApplicationDto {
   @IsString()
   additional_info?: string | null;
 
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  special_needs: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  relationship_with_peers: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  social_skills: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  emergency_relation: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  emergency_contact_name: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  emergency_contact_phone: string | null;
+
+  @ApiProperty({
+    description: 'Additional Medical Information',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  additional_comfort_info: string | null;
+
   @ApiProperty({ description: 'Medical Terms Agreement' })
   @IsBoolean()
   medical_terms: boolean;

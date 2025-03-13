@@ -183,23 +183,30 @@ model Application {
   parent_city        String
 
   // Student Information
-  student_name       String
-  student_lastname   String
-  student_pn         String  @unique
-  student_email      String  @unique
-  student_phone      String
-  student_class      String
-  student_dob        String
-  student_gender     String
-  program            String
-  potential_roommate String? 
+  student_name            String
+  student_lastname        String
+  student_pn              String  @unique
+  student_email           String  @unique
+  student_phone           String
+  student_class           String
+  student_dob             String
+  student_gender          String
+  program                 String
+  potential_roommate      String?
+  special_needs           String?
+  relationship_with_peers String?
+  social_skills           String?
 
   // Medical Information
-  alergens              String?
-  medicaments           String?
-  diet_restrictions     String?
-  physical_disabilities String?
-  additional_info       String?
+  alergens                String?
+  medicaments             String?
+  diet_restrictions       String?
+  physical_disabilities   String?
+  additional_info         String?
+  emergency_relation      String?
+  emergency_contact_name  String?
+  emergency_contact_phone String?
+  additional_comfort_info String?
 
   medical_terms        Boolean
   terms_and_conditions Boolean
