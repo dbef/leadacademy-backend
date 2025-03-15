@@ -297,6 +297,7 @@ export class CoursesService {
       },
       include: {
         course_media: true,
+        application: true,
       },
     });
 
@@ -309,6 +310,10 @@ export class CoursesService {
         course_id,
       },
     });
+
+    if (foundedCourse.application.length > 0) {
+      throw new ConflictException('Course has applications');
+    }
 
     await this.prisma.mediaCourseAssn.deleteMany({
       where: {
