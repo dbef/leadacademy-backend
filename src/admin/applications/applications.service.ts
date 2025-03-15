@@ -65,6 +65,8 @@ export class ApplicationsService {
         foundedApplication.course.start_date,
         foundedApplication.parent_name,
         foundedApplication.course.price,
+        foundedApplication.student_name,
+        foundedApplication.student_lastname,
       );
     }
 

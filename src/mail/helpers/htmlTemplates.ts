@@ -4,6 +4,8 @@ export const applicationSuccess = (
   courseStartDate: Date,
   parent_name: string,
   price: number,
+  student_name: string,
+  student_lastname: string,
 ): string => {
   return `<html lang="en">
 <head>
@@ -80,22 +82,26 @@ export const applicationSuccess = (
 
 <div class="container">
     <img src="https://via.placeholder.com/100" alt="Your Logo" class="image">
-    <div class="header">🌞 Welcome to ${courseName} Summer School! 🎓</div>
+    <div class="header">Congratulations! Your admission has been confirmed. 🎓</div>
     <div class="sub-header">Are You Ready for an Amazing Summer?</div>
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
         <p>Thank you for registering for <strong>${courseName}</strong>. We are thrilled to have you onboard! 🎉</p>
-        <p>The course begins on <strong>${courseStartDate}</strong>. We can't wait to get started!</p>
-        <p>To finalize your registration, please proceed with the payment:</p>
-        <p><strong>Send ${price.toString()} ₾ to IBAN:</strong></p>
+        <p>To complete the final step of the enrollment process, please proceed with the payment  
+ You can make the payment of  ${price.toString()} using Bank Transfer: 
+</p>
+         <p> description: ${courseName}/${student_name} ${student_lastname} </p>
+
+
+        <p><strong>IBAN:</strong></p>
         <p style="font-size: 18px; font-weight: bold; color: #00A76F;">NL86RABO6732807986</p>
     </div>
 
-    <a href="#" class="cta-button">Confirm Your Registration</a>
+    <p>Once the payment is complete, please send the proof of payment to <a href="mailto:contact@sabado.edu.ge"></a>
 
     <div class="footer">
         If you have any questions, reach out to us at 
-        <a href="mailto:support@summerschool.com">support@summerschool.com</a>.
+        <a href="mailto:contact@sabado.edu.ge">support@summerschool.com</a>.
     </div>
 </div>
 

@@ -15,6 +15,8 @@ export class MailService {
     courseStartDate: Date,
     parent_name: string,
     price: number,
+    student_name: string,
+    student_lastname: string,
   ) {
     try {
       await this.mailService.sendMail({
@@ -27,6 +29,8 @@ export class MailService {
           courseStartDate,
           parent_name,
           price,
+          student_name,
+          student_lastname,
         ),
       });
       return 'Email sent';

@@ -185,8 +185,8 @@ model Application {
   // Student Information
   student_name            String
   student_lastname        String
-  student_pn              String  @unique
-  student_email           String  @unique
+  student_pn              String
+  student_email           String
   student_phone           String
   student_class           String
   student_dob             String
@@ -213,4 +213,6 @@ model Application {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   course     Course   @relation(fields: [course_id], references: [course_id])
+
+  @@unique([student_email, student_pn, student_name, student_class, course_id], name: "unique_student_course")
 }

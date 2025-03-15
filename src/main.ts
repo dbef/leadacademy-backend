@@ -20,6 +20,8 @@ async function bootstrap() {
       'http://localhost:8082',
       'https://leadacademy-frontend.vercel.app',
       'https://staging.leadacademy.edu.ge',
+      'https://sabado.edu.ge',
+      'https://staging.sabado.edu.ge',
       'https://leadacademy-frontend-vmsd.vercel.app',
       'https://leadacademy.edu.ge',
       /\.vercel\.app$/,
