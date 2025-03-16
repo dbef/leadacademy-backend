@@ -80,12 +80,9 @@ export const applicationConfirmedAndPayed = (
 <body>
 
 <div class="container">
-    <img src="https://via.placeholder.com/100" alt="Your Logo" class="image">
-    <div class="header">🌞 Welcome to ${courseName} Summer School! 🎓</div>
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
-        <p>Thank you for registering for <strong>${courseName}</strong>. We are thrilled to have you onboard! 🎉</p>
-        <p>The course begins on <strong>${courseStartDate}</strong>. We can't wait to get started!</p>
+        <p>We are pleased to inform you that you have been successfully enrolled in the <strong>${courseName}</strong>. We are excited to have you join us and look forward to an engaging learning experience.</p>
         <p><strong>Student Credentials</strong></p>
         <p style="font-size: 18px; font-weight: bold; color: #00A76F;">Email: ${student_email}</p>
         <p style="font-size: 18px; font-weight: bold; color: #00A76F;">Password: ${student_password}</p>

@@ -81,25 +81,22 @@ export const applicationSuccess = (
 <body>
 
 <div class="container">
-    <img src="https://via.placeholder.com/100" alt="Your Logo" class="image">
     <div class="header">Congratulations! Your admission has been confirmed. 🎓</div>
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
-        <p>Thank you for registering for <strong>${courseName}</strong>. We are thrilled to have you onboard! 🎉</p>
-        <p>To complete the final step of the enrollment process, please proceed with the payment  
- You can make the payment of  ${price.toString()} using Bank Transfer: 
-</p>
+        <p>Congratulations! Your admission to <strong>${courseName}</strong> has been confirmed. We are pleased to welcome you to our community. 🎉</p>
+        <p>To complete the enrollment process, please transfer the final payment ${price.toString()}₾ to the following bank account: </p>
          <p> description: ${courseName}/${student_name} ${student_lastname} </p>
 
-
-        <p><strong>IBAN:</strong></p>
+        <p>Please ensure to include the course name and student's name in the subject line of your transfer to ensure it is processed correctly</p>
+        <p><strong>IBAN:</strong></p> 
         <p style="font-size: 18px; font-weight: bold; color: #00A76F;">GE89BG0000000606319242</p>
     </div>
 
-    <p>Once the payment is complete, please send the proof of payment to <a href="mailto:contact@sabado.edu.ge"></a>
+    <p>Once the payment is completed, kindly send us the payment confirmation for our records. <a href="mailto:contact@sabado.edu.ge"></a>
 
     <div class="footer">
-        If you have any questions, reach out to us at 
+        If you have any questions or need assistance, feel free to reach out.
         <a href="mailto:contact@sabado.edu.ge">contact@sabado.edu.ge</a>.
     </div>
 </div>
