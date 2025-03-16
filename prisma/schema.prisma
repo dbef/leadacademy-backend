@@ -206,6 +206,7 @@ model Application {
   emergency_contact_name  String?
   emergency_contact_phone String?
   additional_comfort_info String?
+  media_release           String  @default("confirm")
 
   medical_terms        Boolean
   terms_and_conditions Boolean

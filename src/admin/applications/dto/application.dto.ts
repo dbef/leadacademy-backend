@@ -212,6 +212,10 @@ export class ApplicationDto {
   @IsBoolean()
   medical_terms: boolean;
 
+  @ApiProperty({ description: 'Medical Terms Agreement' })
+  @IsString()
+  media_release: string;
+
   @ApiProperty({ description: 'Terms and Conditions Agreement' })
   @IsBoolean()
   terms_and_conditions: boolean;

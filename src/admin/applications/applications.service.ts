@@ -133,6 +133,9 @@ export class ApplicationsService {
           },
         },
       },
+      orderBy: {
+        created_at: 'desc',
+      },
     });
 
     return allApplicants;

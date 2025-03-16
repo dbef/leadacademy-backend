@@ -53,6 +53,7 @@ export class ApplicationService {
       relationship_with_peers,
       social_skills,
       special_needs,
+      media_release,
     } = createApplicationDto;
 
     if (createApplicationDto.student_email) {
@@ -152,6 +153,7 @@ export class ApplicationService {
         student_name: student_name,
         student_phone: student_phone,
         student_pn: student_pn,
+        media_release: media_release,
         additional_comfort_info: additional_comfort_info,
         emergency_contact_name: emergency_contact_name,
         emergency_contact_phone: emergency_contact_phone,
@@ -176,7 +178,7 @@ export class ApplicationService {
     }
 
     await this.mailService.sendNotification(
-      'kberadze@gmail.com',
+      'ketevan.beradze@leadacademy.edu.ge',
       foundedCourse.title_ka,
     );
 

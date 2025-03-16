@@ -194,6 +194,10 @@ export class CreateApplicationDto {
   additional_comfort_info: string | null;
 
   @ApiProperty({ description: 'Medical Terms Agreement' })
+  @IsString()
+  media_release: string;
+
+  @ApiProperty({ description: 'Medical Terms Agreement' })
   @IsBoolean()
   medical_terms: boolean;
 
