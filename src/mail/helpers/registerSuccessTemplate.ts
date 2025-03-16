@@ -82,7 +82,6 @@ export const applicationConfirmedAndPayed = (
 <div class="container">
     <img src="https://via.placeholder.com/100" alt="Your Logo" class="image">
     <div class="header">🌞 Welcome to ${courseName} Summer School! 🎓</div>
-    <div class="sub-header">Are You Ready for an Amazing Summer?</div>
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
         <p>Thank you for registering for <strong>${courseName}</strong>. We are thrilled to have you onboard! 🎉</p>
@@ -94,7 +93,7 @@ export const applicationConfirmedAndPayed = (
 
     <div class="footer">
         If you have any questions, reach out to us at 
-        <a href="mailto:support@summerschool.com">support@summerschool.com</a>.
+        <a href="mailto:support@summerschool.com">contact@sabado.edu.ge</a>.
     </div>
 </div>
 

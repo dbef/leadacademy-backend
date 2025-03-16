@@ -83,7 +83,6 @@ export const applicationSuccess = (
 <div class="container">
     <img src="https://via.placeholder.com/100" alt="Your Logo" class="image">
     <div class="header">Congratulations! Your admission has been confirmed. 🎓</div>
-    <div class="sub-header">Are You Ready for an Amazing Summer?</div>
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
         <p>Thank you for registering for <strong>${courseName}</strong>. We are thrilled to have you onboard! 🎉</p>
@@ -94,14 +93,14 @@ export const applicationSuccess = (
 
 
         <p><strong>IBAN:</strong></p>
-        <p style="font-size: 18px; font-weight: bold; color: #00A76F;">NL86RABO6732807986</p>
+        <p style="font-size: 18px; font-weight: bold; color: #00A76F;">GE89BG0000000606319242</p>
     </div>
 
     <p>Once the payment is complete, please send the proof of payment to <a href="mailto:contact@sabado.edu.ge"></a>
 
     <div class="footer">
         If you have any questions, reach out to us at 
-        <a href="mailto:contact@sabado.edu.ge">support@summerschool.com</a>.
+        <a href="mailto:contact@sabado.edu.ge">contact@sabado.edu.ge</a>.
     </div>
 </div>
 
