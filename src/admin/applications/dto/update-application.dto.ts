@@ -3,7 +3,7 @@ import { IsIn, IsString } from 'class-validator';
 
 export class UpdateApplicationDtoAdmin {
   @IsString()
-  @IsIn(['approved', 'rejected'])
+  @IsIn(['approved', 'rejected', 'pending-payment'])
   @ApiProperty({ type: String })
   status: string;
 }

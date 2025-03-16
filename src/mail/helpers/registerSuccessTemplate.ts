@@ -1,11 +1,10 @@
-export const applicationSuccess = (
+export const applicationConfirmedAndPayed = (
   link: string,
   courseName: string,
   courseStartDate: Date,
   parent_name: string,
-  price: number,
-  student_name: string,
-  student_lastname: string,
+  student_email: string,
+  student_password: string,
 ): string => {
   return `<html lang="en">
 <head>
@@ -81,27 +80,21 @@ export const applicationSuccess = (
 <body>
 
 <div class="container">
-    <div class="header">Congratulations! Your admission has been confirmed. 🎓</div>
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
-        <p>Congratulations! Your admission to <strong>${courseName}</strong> has been confirmed. We are pleased to welcome you to our community. 🎉</p>
-        <p>To complete the enrollment process, please transfer the final payment ${price.toString()}₾ to the following bank account: </p>
-         <p> description: ${courseName}/${student_name} ${student_lastname} </p>
-
-        <p>Please ensure to include the course name and student's name in the subject line of your transfer to ensure it is processed correctly</p>
-        <p><strong>IBAN:</strong></p> 
-        <p style="font-size: 18px; font-weight: bold; color: #00A76F;">GE89BG0000000606319242</p>
+        <p>We are pleased to inform you that you have been successfully enrolled in the <strong>${courseName}</strong>. We are excited to have you join us and look forward to an engaging learning experience.</p>
+        <p><strong>Student Credentials</strong></p>
+        <p style="font-size: 18px; font-weight: bold; color: #00A76F;">Email: ${student_email}</p>
+        <p style="font-size: 18px; font-weight: bold; color: #00A76F;">Password: ${student_password}</p>
     </div>
 
-    <p>Once the payment is completed, kindly send us the payment confirmation for our records. <a href="mailto:contact@sabado.edu.ge"></a>
-
     <div class="footer">
-        If you have any questions or need assistance, feel free to reach out.
-        <a href="mailto:contact@sabado.edu.ge">contact@sabado.edu.ge</a>.
+        If you have any questions, reach out to us at 
+        <a href="mailto:support@summerschool.com">contact@sabado.edu.ge</a>.
     </div>
 </div>
 
 </body>
 </html>
-`;
+  `;
 };

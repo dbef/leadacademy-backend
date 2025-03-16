@@ -1,7 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CourseDto } from '../admin/courses/dto/course.dto';
+import { CoursesQuery } from './dto/courses-query.dto';
 
 @Controller('courses')
 @ApiTags('Courses - public')
@@ -16,8 +17,8 @@ export class CoursesController {
     description: 'List of all courses',
     type: [CourseDto],
   })
-  findAllCourses() {
-    return this.coursesService.findAll();
+  findAllCourses(@Query() query: CoursesQuery) {
+    return this.coursesService.findAll(query);
   }
 
   @Get(':id')

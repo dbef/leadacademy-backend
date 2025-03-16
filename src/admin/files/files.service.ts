@@ -9,6 +9,7 @@ import { FolderDto } from './dto/folder-dto';
 import { FileDto } from './dto/file.dto';
 import { FileDtoRt } from './dto/file-rt.dto';
 import { FileQueryDto } from './dto/file-query.dto';
+import { NewUploadedFiles } from './dto/uploaded-files-new.dto';
 
 @Injectable()
 export class FilesService {
@@ -63,7 +64,7 @@ export class FilesService {
   }
 
   async uploadFilesByFolder(
-    files: Express.Multer.File[],
+    files: NewUploadedFiles[],
     folderName: string,
   ): Promise<FileDto[]> {
     if (!files.length) {
@@ -72,24 +73,6 @@ export class FilesService {
 
     const uploadedFiles = await Promise.all(
       files.map(async (file) => {
-        const randomNumber = Math.floor(100000 + Math.random() * 900000);
-        const fileName = `${randomNumber}-${file.originalname}`;
-
-        const key = `media/${fileName}`;
-        const params = {
-          Bucket: process.env.BUCKET_NAME_AWS,
-          Key: key,
-          Body: file.buffer,
-          ContentType: file.mimetype,
-        };
-
-        const upload = new Upload({
-          client: this.s3,
-          params,
-        });
-
-        const result = await upload.done();
-
         const foundedFolder = await this.prisma.folder.findUnique({
           where: {
             folder_name: folderName,
@@ -99,9 +82,9 @@ export class FilesService {
         const createdMedia = await this.prisma.media.create({
           data: {
             location: folderName,
-            media_name: fileName,
-            media_url: result.Location,
-            type: file.mimetype,
+            media_name: file.name,
+            media_url: `https://lead-for-test.s3.eu-north-1.amazonaws.com/media/${file.name}`,
+            type: file.type,
             folder_id: foundedFolder.folder_id,
           },
         });
@@ -254,17 +237,5 @@ export class FilesService {
       data: allFiles,
       count,
     };
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} file`;
-  }
-
-  update(id: number, updateFileDto: UpdateFileDto) {
-    return `This action updates a #${id} file`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} file`;
   }
 }

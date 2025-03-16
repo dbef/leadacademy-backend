@@ -30,6 +30,7 @@ import { CreateFolderDto } from './dto/create-folder.dto';
 import { FileDto } from './dto/file.dto';
 import { FileDtoRt } from './dto/file-rt.dto';
 import { FileQueryDto } from './dto/file-query.dto';
+import { NewUploadedFiles } from './dto/uploaded-files-new.dto';
 
 @Controller('admin/files')
 @ApiTags('Files')
@@ -79,8 +80,6 @@ export class FilesController {
   }
 
   @Post('upload/by-folder/:folder_name')
-  @UseInterceptors(FilesInterceptor('files', 10))
-  @ApiConsumes('multipart/form-data') // Specifies multipart form data for file uploads
   @ApiParam({
     name: 'folder_name',
     required: true,
@@ -90,29 +89,15 @@ export class FilesController {
   @ApiOperation({
     summary: 'Upload files',
   })
+  @ApiBody({
+    type: [NewUploadedFiles],
+  })
   @ApiOkResponse({
     description: 'Files successfully uploaded',
     type: [FileDto],
   })
-  @ApiBody({
-    description: 'List of files to upload',
-    type: 'multipart/form-data',
-    required: true,
-    schema: {
-      type: 'object',
-      properties: {
-        files: {
-          type: 'array',
-          items: {
-            type: 'string',
-            format: 'binary',
-          },
-        },
-      },
-    },
-  })
   async uploadFilesByFolder(
-    @UploadedFiles() files: Express.Multer.File[],
+    @Body() files: NewUploadedFiles[],
     @Param('folder_name') folderName: string,
   ) {
     return this.filesService.uploadFilesByFolder(files, folderName);
