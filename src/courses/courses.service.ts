@@ -13,7 +13,7 @@ export class CoursesService {
     const allCourses = await this.prisma.course.findMany({
       take: limit ? Number(limit) : 50,
       orderBy: {
-        created_at: 'desc',
+        start_date: 'desc',
       },
       include: {
         files_course_assn: {
