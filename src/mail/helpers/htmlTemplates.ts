@@ -85,7 +85,7 @@ export const applicationSuccess = (
     <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
         <p>Congratulations! Your admission to <strong>${courseName}</strong> has been confirmed. We are pleased to welcome you to our community. 🎉</p>
-        <p>To complete the enrollment process, please transfer the final payment ${price.toString()}₾ to the following bank account: </p>
+        <p>To complete the enrollment process, please transfer the final payment ${price.toString()}₾. </p>
          <p> description: ${courseName}/${student_name} ${student_lastname} </p>
 
         <p>Please ensure to include the course name and student's name in the subject line of your transfer to ensure it is processed correctly</p>
