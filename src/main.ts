@@ -16,18 +16,7 @@ async function bootstrap() {
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.enableCors({
-    origin: [
-      'http://localhost:8082',
-      'https://leadacademy-frontend.vercel.app',
-      'https://staging.leadacademy.edu.ge',
-      'https://sabado.edu.ge',
-      'https://www.sabado.edu.ge',
-      'https://staging.sabado.edu.ge',
-      'https://leadacademy-frontend-vmsd.vercel.app',
-      'https://leadacademy.edu.ge',
-      'https://www.leadacademy.edu.ge',
-      /\.vercel\.app$/,
-    ],
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
