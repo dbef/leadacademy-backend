@@ -105,7 +105,14 @@ export class ApplicationService {
           select: {
             application: {
               where: {
-                status: 'approved',
+                OR: [
+                  {
+                    status: 'approved',
+                  },
+                  {
+                    status: 'pending-payment',
+                  },
+                ],
               },
             },
           },
