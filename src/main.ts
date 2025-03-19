@@ -16,26 +16,15 @@ async function bootstrap() {
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.enableCors({
-    origin: [
-      'http://localhost:8082',
-      'https://leadacademy-frontend.vercel.app',
-      'https://staging.leadacademy.edu.ge',
-      'https://sabado.edu.ge',
-      'https://www.sabado.edu.ge',
-      'https://staging.sabado.edu.ge',
-      'https://leadacademy-frontend-vmsd.vercel.app',
-      'https://leadacademy.edu.ge',
-      'https://www.leadacademy.edu.ge',
-      /\.vercel\.app$/,
-    ],
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
   app.setGlobalPrefix('api/v1');
 
   const config = new DocumentBuilder()
-    .setTitle('LeadAcademy API v1 Checkout')
-    .setDescription('LeadAcademy API v1')
+    .setTitle('Sabado API v1 Checkout')
+    .setDescription('Sabado API v1')
     .setVersion('V1')
     .addBearerAuth()
     .build();

@@ -49,7 +49,14 @@ export class CoursesService {
           select: {
             application: {
               where: {
-                status: 'approved',
+                OR: [
+                  {
+                    status: 'approved',
+                  },
+                  {
+                    status: 'pending-payment',
+                  },
+                ],
               },
             },
           },
@@ -99,7 +106,14 @@ export class CoursesService {
           select: {
             application: {
               where: {
-                status: 'approved',
+                OR: [
+                  {
+                    status: 'approved',
+                  },
+                  {
+                    status: 'pending-payment',
+                  },
+                ],
               },
             },
           },

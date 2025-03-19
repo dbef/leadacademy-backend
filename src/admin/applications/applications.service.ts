@@ -25,7 +25,18 @@ export class ApplicationsService {
           include: {
             _count: {
               select: {
-                application: true,
+                application: {
+                  where: {
+                    OR: [
+                      {
+                        status: 'approved',
+                      },
+                      {
+                        status: 'pending-payment',
+                      },
+                    ],
+                  },
+                },
               },
             },
           },
