@@ -190,7 +190,7 @@ export class ApplicationService {
     );
 
     await this.mailService.sendNotification(
-      'soso.guruli@gmail.com',
+      'ana.darchiashvili@europeanschool.ge',
       foundedCourse.title_ka,
     );
 
