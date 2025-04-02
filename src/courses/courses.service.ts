@@ -57,11 +57,11 @@ export class CoursesService {
       };
     }
 
-    const mappedSeasons = season.split(',').map((s) => {
-      return this.getMonthRange(s);
-    });
-
     if (season) {
+      const mappedSeasons = season.split(',').map((s) => {
+        return this.getMonthRange(s);
+      });
+
       const ranges = mappedSeasons
         .map((range) => {
           const start = new Date(range.start);
