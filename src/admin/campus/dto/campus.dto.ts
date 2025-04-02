@@ -36,6 +36,9 @@ export class CampusDto {
   @IsDate()
   updated_at: Date;
 
+  @ApiPropertyOptional()
+  campus_name_short?: string;
+
   @ApiProperty({ type: [CampusFileAssnDto] })
   @IsArray()
   campus_media_assn: CampusFileAssnDto[];

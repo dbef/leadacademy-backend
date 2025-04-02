@@ -124,6 +124,7 @@ model Admin {
 
 model Campus {
   campus_id         String            @id @default(uuid())
+  campus_name_short String?           @default("tsinandali")
   campus_name_ka    String            @unique
   campus_name_en    String            @unique
   maps_url          String?
