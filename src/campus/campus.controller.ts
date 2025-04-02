@@ -9,7 +9,7 @@ export class CampusController {
 
   @Get()
   @ApiOkResponse({
-    description: 'Get all campuses',
+    description: 'Get all Campuses',
     type: [CampusDto],
   })
   findAllCampuses() {
