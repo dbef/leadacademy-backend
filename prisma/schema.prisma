@@ -114,6 +114,19 @@ model CourseMedia {
   course          Course   @relation(fields: [course_id], references: [course_id])
 }
 
+model NewsMedia {
+  course_media_id String   @id @default(uuid())
+  news_id         String
+  media_url       String
+  original_name   String
+  location        String
+  type            String
+  position        Int      @default(0)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  news            News     @relation(fields: [news_id], references: [news_id])
+}
+
 model Admin {
   id         String   @id @default(uuid())
   username   String   @unique
@@ -163,6 +176,22 @@ model Course {
   media_course_assn    MediaCourseAssn[]
   files_course_assn    FileCourseAssn[]
   lecturer_course_assn LecturerCourseAssn[]
+}
+
+model News {
+  news_id        String      @id @default(uuid())
+  title_ka       String
+  title_en       String
+  description_ka String
+  description_en String
+  created_at     DateTime    @default(now())
+  updated_at     DateTime    @updatedAt
+  hashtags       String?
+  short_des_ka   String?
+  short_des_en   String?
+  keywords_ka    String?
+  keywords_en    String?
+  news_media     NewsMedia[]
 }
 
 model Application {

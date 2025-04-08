@@ -49,7 +49,11 @@ export class CoursesService {
   async findAll(query: CoursesQuery): Promise<CourseDto[]> {
     const { location, season, limit } = query;
 
-    const whereQuery: any = {};
+    const whereQuery: any = {
+      start_date: {
+        gte: new Date(),
+      },
+    };
 
     if (location) {
       whereQuery.campuse = {
@@ -121,6 +125,9 @@ export class CoursesService {
     const foudedCourse = await this.prisma.course.findUnique({
       where: {
         course_id: id,
+        start_date: {
+          gte: new Date(),
+        },
       },
       include: {
         files_course_assn: {

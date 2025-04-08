@@ -15,9 +15,10 @@ import { CampusController } from './campus/campus.controller';
 import { CampusService } from './campus/campus.service';
 import { LecturerController } from './lecturer/lecturer.controller';
 import { LecturerService } from './lecturer/lecturer.service';
+import { NewsModule } from './news/news.module';
 
 @Module({
-  imports: [JwtModule.register({}), ConfigModule.forRoot()],
+  imports: [JwtModule.register({}), ConfigModule.forRoot(), NewsModule],
   controllers: [
     AdminController,
     FilesController,
