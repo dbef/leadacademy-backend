@@ -94,7 +94,7 @@ export class CoursesService {
       where: whereQuery,
       take: limit ? Number(limit) : 50,
       orderBy: {
-        start_date: 'desc',
+        start_date: 'asc',
       },
       include: {
         files_course_assn: { include: { media: true } },
