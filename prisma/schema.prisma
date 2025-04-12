@@ -156,6 +156,7 @@ model Course {
   title_en             String
   description_ka       String
   description_en       String
+  is_published         Boolean              @default(true)
   short_des_ka         String?
   short_des_en         String?
   keywords_ka          String?

@@ -47,13 +47,40 @@ export class CoursesService {
   }
 
   async findAll(query: CoursesQuery): Promise<CourseDto[]> {
-    const { location, season, limit } = query;
+    const {
+      location,
+      season,
+      limit,
+      direction,
+      page,
+      rowsPerPage,
+      searchText,
+      is_published,
+      sortBy,
+    } = query;
 
     const whereQuery: any = {
       start_date: {
         gte: new Date(),
       },
+      is_published: true,
     };
+
+    let orderByQuery = {};
+
+    if (is_published) {
+      if (is_published === 'true') {
+        whereQuery.is_published = true;
+      }
+
+      if (is_published === 'false') {
+        whereQuery.is_published = false;
+      }
+
+      if (is_published === 'all') {
+        delete whereQuery.is_published;
+      }
+    }
 
     if (location) {
       whereQuery.campuse = {
@@ -90,12 +117,23 @@ export class CoursesService {
       }
     }
 
+    if (sortBy && direction) {
+      orderByQuery = {
+        [sortBy]: direction.toLocaleLowerCase() === 'asc' ? 'asc' : 'desc',
+      };
+    } else {
+      orderByQuery = {
+        start_date: 'asc',
+      };
+    }
+
+    console.log('Where query:', whereQuery);
+
     const allCourses = await this.prisma.course.findMany({
       where: whereQuery,
-      take: limit ? Number(limit) : 50,
-      orderBy: {
-        start_date: 'asc',
-      },
+      orderBy: orderByQuery,
+      take: Number(limit ? limit : 50),
+      skip: Number(page ? page : 0) * Number(limit ? limit : 50),
       include: {
         files_course_assn: { include: { media: true } },
         media_course_assn: { include: { media: true } },
@@ -117,6 +155,8 @@ export class CoursesService {
         },
       },
     });
+
+    console.log('allCourses', allCourses);
 
     return allCourses;
   }

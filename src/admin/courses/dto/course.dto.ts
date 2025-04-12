@@ -8,6 +8,7 @@ import {
   Min,
   IsPositive,
   IsUUID,
+  IsBoolean,
 } from 'class-validator';
 import { FileCourseAssnDto } from './file-course-assn.dto';
 import { LecturerCourseAssnDto } from './lecturer-course-assn.dto';
@@ -41,6 +42,10 @@ export class CourseDto {
   @IsString()
   @IsNotEmpty()
   description_ka: string;
+
+  @ApiProperty({ description: 'Published or not', type: Boolean })
+  @IsBoolean()
+  is_published: boolean;
 
   @ApiProperty({ description: 'Description in English' })
   @IsString()

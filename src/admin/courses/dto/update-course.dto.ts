@@ -1,5 +1,12 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, IsInt, Min, IsPositive } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsInt,
+  Min,
+  IsPositive,
+  IsBoolean,
+} from 'class-validator';
 import { FileDto } from '../../files/dto/file.dto';
 
 export class EditCourseDto {
@@ -57,6 +64,10 @@ export class EditCourseDto {
   @IsString()
   @IsOptional()
   lecturer_id?: string | null;
+
+  @ApiPropertyOptional({ description: 'Course media', type: Boolean })
+  @IsBoolean()
+  is_published: boolean;
 
   @ApiPropertyOptional({
     description: 'Course media',

@@ -86,12 +86,20 @@ export class ApplicationsService {
 
       const hashedPassword = await argon2.hash(passwd);
 
-      await this.prisma.user.create({
-        data: {
+      const foundedUser = await this.prisma.user.findFirst({
+        where: {
           email: foundedApplication.student_email,
-          password: hashedPassword,
         },
       });
+
+      if (!foundedUser) {
+        await this.prisma.user.create({
+          data: {
+            email: foundedApplication.student_email,
+            password: hashedPassword,
+          },
+        });
+      }
 
       await this.mailService.sendConfirmation(
         foundedApplication.parent_email,
@@ -100,7 +108,9 @@ export class ApplicationsService {
         foundedApplication.course.start_date,
         foundedApplication.parent_name,
         foundedApplication.student_email,
-        passwd,
+        foundedUser
+          ? 'User already registered and please use registered password'
+          : passwd,
       );
     }
 
