@@ -1,20 +1,33 @@
-import { Controller, Post, Body, Param, Get } from '@nestjs/common';
+import { Controller, Post, Param, Body, Get, Res } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { ApiParam } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @Controller('payment')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
-  @Get('check/:application_id')
+  @Get('redirect/:application_id')
   @ApiParam({
     name: 'application_id',
+    description: 'ID of the application to create a payment for',
     required: true,
-    description: 'Application ID',
-    type: String,
   })
-  async check(@Param('application_id') application_id: string) {
-    return this.paymentService.checkOrderStatus(application_id);
+  getAccessToken(
+    @Param('application_id') applicationId: string,
+    @Res() res: Response,
+  ) {
+    return this.paymentService.redirectToPayment(applicationId, res);
+  }
+
+  @Post(':application_id')
+  @ApiParam({
+    name: 'application_id',
+    description: 'ID of the application to create a payment for',
+    required: true,
+  })
+  create(@Param('application_id') applicationId: string) {
+    return this.paymentService.requestOrder(applicationId);
   }
 
   @Post('callback')

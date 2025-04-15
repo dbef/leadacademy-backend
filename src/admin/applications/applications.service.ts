@@ -71,11 +71,11 @@ export class ApplicationsService {
     });
 
     if (updateApplicationDto.status === 'pending-payment') {
-      const link = await this.paymentService.requestOrder(id);
+      const link = `${process.env.BASE_API_URL}/payment/redirect/${id}`;
 
       await this.mailService.sendApplicationPaymentMail(
         foundedApplication.parent_email,
-        link._links.redirect.href,
+        link,
         foundedApplication.course.title_en,
         foundedApplication.course.start_date,
         foundedApplication.parent_name,

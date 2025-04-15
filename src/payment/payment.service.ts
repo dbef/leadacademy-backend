@@ -11,6 +11,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { OrderDto } from './dto/order-details.dto';
 import { ApplicationsService } from '../admin/applications/applications.service';
 import { PaymentCallbackResponseDto } from './dto/payment-request.dto';
+import { Response } from 'express';
 
 @Injectable()
 export class PaymentService {
@@ -116,7 +117,6 @@ export class PaymentService {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
-      'Idempotency-Key': foundedApplication.application_id,
     };
 
     const body = {
@@ -151,16 +151,24 @@ export class PaymentService {
       },
     });
 
-    if (!foundedOrder) {
-      await this.prisma.order.create({
+    if (foundedOrder) {
+      await this.prisma.order.update({
+        where: {
+          application_id: foundedApplication.application_id,
+        },
         data: {
           order_id: response.data.id,
-          application_id: foundedApplication.application_id,
         },
       });
     }
 
     return response.data as PaymentCallbackResponseDto;
+  }
+
+  async redirectToPayment(application_id: string, res: Response) {
+    const response = await this.requestOrder(application_id);
+
+    return res.redirect(response._links.redirect.href);
   }
 
   async checkOrderStatus(application_id: string) {

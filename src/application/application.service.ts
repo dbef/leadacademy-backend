@@ -64,13 +64,6 @@ export class ApplicationService {
         },
       });
 
-      console.log(
-        'foundedApplication',
-        foundedApplication,
-        createApplicationDto.student_email,
-        createApplicationDto.course_id,
-      );
-
       if (foundedApplication) {
         throw new ConflictException(
           'Application with this email already exists',
