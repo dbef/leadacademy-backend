@@ -6,6 +6,7 @@ import {
   IsInt,
   Min,
   IsPositive,
+  IsBoolean,
 } from 'class-validator';
 import { FileDto } from '../../files/dto/file.dto';
 
@@ -36,6 +37,13 @@ export class CreateCourseDto {
   })
   @IsNotEmpty()
   start_date: string;
+
+  @ApiProperty({
+    description: 'Is the course published?',
+    type: Boolean,
+  })
+  @IsBoolean()
+  is_published: boolean;
 
   @ApiProperty({
     description: 'End date of the course',

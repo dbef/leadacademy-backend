@@ -37,6 +37,7 @@ export class CoursesService {
       keywords_en,
       keywords_ka,
       short_des_en,
+      is_published,
       short_des_ka,
     } = createCourseDto;
 
@@ -62,6 +63,7 @@ export class CoursesService {
         start_date: new Date(start_date),
         title_en,
         title_ka,
+        is_published,
         campuse_id: campus_id ? campus_id : null,
         short_des_en: short_des_en ? short_des_en : null,
         short_des_ka: short_des_ka ? short_des_ka : null,
@@ -154,6 +156,7 @@ export class CoursesService {
       keywords_ka,
       short_des_en,
       short_des_ka,
+      is_published,
     } = data;
 
     const course = await this.prisma.course.findUnique({
@@ -179,6 +182,7 @@ export class CoursesService {
         title_ka,
         max_students,
         price,
+        is_published,
         campuse_id: campus_id ? campus_id : null,
         short_des_en: short_des_en ? short_des_en : null,
         short_des_ka: short_des_ka ? short_des_ka : null,
