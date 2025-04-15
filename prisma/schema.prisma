@@ -179,6 +179,14 @@ model Course {
   lecturer_course_assn LecturerCourseAssn[]
 }
 
+model Order {
+  id             String   @id @default(uuid())
+  order_id       String   @unique
+  application_id String   @unique
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+}
+
 model News {
   news_id        String      @id @default(uuid())
   title_ka       String
