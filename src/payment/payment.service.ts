@@ -1,5 +1,7 @@
 import {
   ConflictException,
+  forwardRef,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -14,6 +16,7 @@ import { PaymentCallbackResponseDto } from './dto/payment-request.dto';
 export class PaymentService {
   constructor(
     private prisma: PrismaService,
+    @Inject(forwardRef(() => ApplicationsService))
     private applicationService: ApplicationsService,
   ) {}
 
