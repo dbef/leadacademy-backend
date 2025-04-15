@@ -12,6 +12,7 @@ import { OrderDto } from './dto/order-details.dto';
 import { ApplicationsService } from '../admin/applications/applications.service';
 import { PaymentCallbackResponseDto } from './dto/payment-request.dto';
 import { Response } from 'express';
+import { CourseDto } from '../admin/courses/dto/course.dto';
 
 @Injectable()
 export class PaymentService {
@@ -171,7 +172,7 @@ export class PaymentService {
     return res.redirect(response._links.redirect.href);
   }
 
-  async checkOrderStatus(application_id: string) {
+  async checkOrderStatus(application_id: string): Promise<CourseDto> {
     const foundedOrder = await this.prisma.order.findUnique({
       where: {
         application_id: application_id,
@@ -200,7 +201,37 @@ export class PaymentService {
       });
     }
 
-    return 'Order has been checked';
+    const foundedApplication = await this.prisma.application.findUnique({
+      where: {
+        application_id: application_id,
+      },
+      include: {
+        course: {
+          include: {
+            files_course_assn: { include: { media: true } },
+            media_course_assn: { include: { media: true } },
+            lecturer_course_assn: { include: { lecturer: true } },
+            campuse: {
+              include: {
+                campus_file_assn: { include: { media: true } },
+                campus_media_assn: { include: { media: true } },
+              },
+            },
+            _count: {
+              select: {
+                application: {
+                  where: {
+                    OR: [{ status: 'approved' }, { status: 'pending-payment' }],
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return foundedApplication.course;
   }
 
   async callback(body: any) {

@@ -27,7 +27,7 @@ export class PaymentController {
     required: true,
   })
   create(@Param('application_id') applicationId: string) {
-    return this.paymentService.requestOrder(applicationId);
+    return this.paymentService.checkOrderStatus(applicationId);
   }
 
   @Post('callback')
