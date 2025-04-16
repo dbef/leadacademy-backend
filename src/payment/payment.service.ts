@@ -137,8 +137,8 @@ export class PaymentService {
         ],
       },
       redirect_urls: {
-        fail: `${process.env.SUCCESS_REDIRECT}/${foundedApplication.application_id}`,
-        success: `${process.env.FAIL_REDIRECT}/${foundedApplication.application_id}`,
+        fail: `${process.env.FAIL_REDIRECT}/${foundedApplication.application_id}`,
+        success: `${process.env.SUCCESS_REDIRECT}/${foundedApplication.application_id}`,
       },
     };
 
@@ -161,12 +161,30 @@ export class PaymentService {
           order_id: response.data.id,
         },
       });
+    } else {
+      await this.prisma.order.create({
+        data: {
+          order_id: response.data.id,
+          application_id: foundedApplication.application_id,
+        },
+      });
     }
 
     return response.data as PaymentCallbackResponseDto;
   }
 
   async redirectToPayment(application_id: string, res: Response) {
+    const foundedApplication = await this.prisma.application.findUnique({
+      where: {
+        application_id: application_id,
+      },
+    });
+
+    if (foundedApplication.status === 'approved') {
+      return res.redirect(
+        `${process.env.SUCCESS_REDIRECT}/${foundedApplication.application_id}`,
+      );
+    }
     const response = await this.requestOrder(application_id);
 
     return res.redirect(response._links.redirect.href);
@@ -178,6 +196,8 @@ export class PaymentService {
         application_id: application_id,
       },
     });
+
+    console.log('Founded order:', foundedOrder);
 
     if (!foundedOrder) {
       throw new NotFoundException('Order not found');
