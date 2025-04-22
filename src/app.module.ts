@@ -11,6 +11,7 @@ import { MailModule } from './mail/mail.module';
 import { CoursesModule } from './courses/courses.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { CampusModule } from './campus/campus.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CampusModule } from './campus/campus.module';
     CoursesModule,
     GalleryModule,
     CampusModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

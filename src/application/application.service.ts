@@ -6,6 +6,7 @@ import {
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { MailService } from '../mail/mail.service';
+import { CreatedApplicationDto } from './dto/created-application-res.dto';
 
 @Injectable()
 export class ApplicationService {
@@ -14,7 +15,9 @@ export class ApplicationService {
     private mailService: MailService,
   ) {}
 
-  async create(createApplicationDto: CreateApplicationDto) {
+  async create(
+    createApplicationDto: CreateApplicationDto,
+  ): Promise<CreatedApplicationDto> {
     const {
       address,
       city,
@@ -63,13 +66,6 @@ export class ApplicationService {
           course_id: createApplicationDto.course_id,
         },
       });
-
-      console.log(
-        'foundedApplication',
-        foundedApplication,
-        createApplicationDto.student_email,
-        createApplicationDto.course_id,
-      );
 
       if (foundedApplication) {
         throw new ConflictException(
@@ -176,7 +172,7 @@ export class ApplicationService {
         parent_gender: parent_gender,
         student_gender: student_gender,
         parent_nationality: nationality,
-        status: 'pending',
+        status: 'pending-payment',
       },
     });
 
@@ -195,7 +191,7 @@ export class ApplicationService {
     );
 
     return {
-      message: 'Application successfully created',
+      application_id: createdApplication.application_id,
     };
   }
 }

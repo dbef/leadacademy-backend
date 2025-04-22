@@ -4,10 +4,12 @@ import { MailService } from '../../mail/mail.service';
 import { ApplicationDto } from './dto/application.dto';
 import { UpdateApplicationDtoAdmin } from './dto/update-application.dto';
 import * as argon2 from 'argon2';
+import { PaymentService } from '../../payment/payment.service';
 @Injectable()
 export class ApplicationsService {
   constructor(
     private prisma: PrismaService,
+    private paymentService: PaymentService,
     private mailService: MailService,
   ) {}
 
@@ -69,9 +71,11 @@ export class ApplicationsService {
     });
 
     if (updateApplicationDto.status === 'pending-payment') {
+      const link = `${process.env.BASE_API_URL}/payment/redirect/${id}`;
+
       await this.mailService.sendApplicationPaymentMail(
         foundedApplication.parent_email,
-        'https://google.com',
+        link,
         foundedApplication.course.title_en,
         foundedApplication.course.start_date,
         foundedApplication.parent_name,
