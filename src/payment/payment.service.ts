@@ -125,7 +125,7 @@ export class PaymentService {
       external_order_id: foundedApplication.application_id,
       purchase_units: {
         currency: 'GEL',
-        total_amount: 0,
+        total_amount: Number(foundedApplication.course.price),
         basket: [
           {
             quantity: 1,
