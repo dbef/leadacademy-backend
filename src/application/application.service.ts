@@ -106,7 +106,7 @@ export class ApplicationService {
                     status: 'approved',
                   },
                   {
-                    status: 'pending-payment',
+                    status: 'paid',
                   },
                 ],
               },
@@ -172,7 +172,6 @@ export class ApplicationService {
         parent_gender: parent_gender,
         student_gender: student_gender,
         parent_nationality: nationality,
-        status: 'pending-payment',
       },
     });
 

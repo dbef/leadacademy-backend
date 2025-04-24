@@ -13,6 +13,7 @@ import { ApplicationsService } from '../admin/applications/applications.service'
 import { PaymentCallbackResponseDto } from './dto/payment-request.dto';
 import { Response } from 'express';
 import { CourseDto } from '../admin/courses/dto/course.dto';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class PaymentService {
@@ -20,6 +21,7 @@ export class PaymentService {
     private prisma: PrismaService,
     @Inject(forwardRef(() => ApplicationsService))
     private applicationService: ApplicationsService,
+    private mailService: MailService,
   ) {}
 
   async getAccessToken(): Promise<{
@@ -73,7 +75,7 @@ export class PaymentService {
                         status: 'approved',
                       },
                       {
-                        status: 'pending-payment',
+                        status: 'paid',
                       },
                     ],
                     application_id: {
@@ -100,7 +102,7 @@ export class PaymentService {
       throw new NotFoundException('Course already started');
     }
 
-    if (foundedApplication.status !== 'pending-payment') {
+    if (foundedApplication.status !== 'pending') {
       throw new NotFoundException('Application is not pending payment');
     }
 
@@ -125,11 +127,11 @@ export class PaymentService {
       external_order_id: foundedApplication.application_id,
       purchase_units: {
         currency: 'GEL',
-        total_amount: Number(foundedApplication.course.price),
+        total_amount: 0,
         basket: [
           {
             quantity: 1,
-            unit_price: 0,
+            unit_price: Number(foundedApplication.course.price),
             product_id: foundedApplication.application_id,
             image: foundedApplication.course?.course_media[0]?.media_url,
             description: foundedApplication.course.title_en,
@@ -180,7 +182,10 @@ export class PaymentService {
       },
     });
 
-    if (foundedApplication.status === 'approved') {
+    if (
+      foundedApplication.status === 'approved' ||
+      foundedApplication.status === 'paid'
+    ) {
       return res.redirect(
         `${process.env.SUCCESS_REDIRECT}/${foundedApplication.application_id}`,
       );
@@ -196,8 +201,6 @@ export class PaymentService {
         application_id: application_id,
       },
     });
-
-    console.log('Founded order:', foundedOrder);
 
     if (!foundedOrder) {
       throw new NotFoundException('Order not found');
@@ -241,7 +244,7 @@ export class PaymentService {
               select: {
                 application: {
                   where: {
-                    OR: [{ status: 'approved' }, { status: 'pending-payment' }],
+                    OR: [{ status: 'approved' }, { status: 'paid' }],
                   },
                 },
               },
@@ -268,19 +271,20 @@ export class PaymentService {
       });
 
       if (foundedApplication) {
-        if (foundedApplication.status === 'pending-payment') {
+        if (foundedApplication.status === 'pending') {
           await this.prisma.application.update({
             where: {
               application_id: data.external_order_id,
             },
             data: {
-              status: 'approved',
+              status: 'paid',
             },
           });
 
-          await this.applicationService.update(data.external_order_id, {
-            status: 'approved',
-          });
+          await this.mailService.sendPaymentConfirmation(
+            foundedApplication.parent_email,
+            foundedApplication.parent_name,
+          );
         }
       }
     }

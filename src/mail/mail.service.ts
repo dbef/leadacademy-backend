@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { applicationSuccess } from './helpers/htmlTemplates';
 import { applicationConfirmedAndPayed } from './helpers/registerSuccessTemplate';
 import { notificationTemplate } from './helpers/notificationTemplate';
+import { paymentSuccessTemplate } from './helpers/paymentSuccessTemplate';
 
 @Injectable()
 export class MailService {
@@ -62,6 +63,21 @@ export class MailService {
           student_email,
           student_password,
         ),
+      });
+      return 'Email sent';
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw new Error('Failed to send email');
+    }
+  }
+
+  async sendPaymentConfirmation(to: string, parent_name: string) {
+    try {
+      await this.mailService.sendMail({
+        from: process.env.EMAIL_USERNAME,
+        to: to,
+        subject: 'Payment for course',
+        html: paymentSuccessTemplate(parent_name),
       });
       return 'Email sent';
     } catch (error) {
