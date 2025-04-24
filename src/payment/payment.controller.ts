@@ -38,4 +38,9 @@ export class PaymentController {
   async callBack(@Body() body: any) {
     return this.paymentService.callback(body);
   }
+
+  @Get('update-statuses')
+  async updateStatuses() {
+    return this.paymentService.updateStatus();
+  }
 }

@@ -34,7 +34,7 @@ export class ApplicationsService {
                         status: 'approved',
                       },
                       {
-                        status: 'pending-payment',
+                        status: 'paid',
                       },
                     ],
                   },
@@ -70,7 +70,7 @@ export class ApplicationsService {
       },
     });
 
-    if (updateApplicationDto.status === 'pending-payment') {
+    if (updateApplicationDto.status === 'pending') {
       const link = `${process.env.BASE_API_URL}/payment/redirect/${id}`;
 
       await this.mailService.sendApplicationPaymentMail(
@@ -92,7 +92,10 @@ export class ApplicationsService {
 
       const foundedUser = await this.prisma.user.findFirst({
         where: {
-          email: foundedApplication.student_email,
+          email: {
+            equals: foundedApplication.student_email,
+            mode: 'insensitive',
+          },
         },
       });
 
