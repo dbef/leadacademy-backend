@@ -131,7 +131,7 @@ export class PaymentService {
         basket: [
           {
             quantity: 1,
-            unit_price: 0,
+            unit_price: Number(foundedApplication.course.price),
             product_id: foundedApplication.application_id,
             image: foundedApplication.course?.course_media[0]?.media_url,
             description: foundedApplication.course.title_en,
