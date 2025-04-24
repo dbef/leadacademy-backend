@@ -102,7 +102,7 @@ export class PaymentService {
       throw new NotFoundException('Course already started');
     }
 
-    if (foundedApplication.status !== 'paid') {
+    if (foundedApplication.status !== 'pending') {
       throw new NotFoundException('Application is not pending payment');
     }
 
