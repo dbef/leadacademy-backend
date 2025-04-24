@@ -289,15 +289,4 @@ export class PaymentService {
       }
     }
   }
-
-  async updateStatus() {
-    await this.prisma.application.updateMany({
-      where: {
-        status: 'pending-payment',
-      },
-      data: {
-        status: 'paid',
-      },
-    });
-  }
 }

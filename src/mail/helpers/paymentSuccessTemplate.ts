@@ -70,7 +70,7 @@ export const paymentSuccessTemplate = (parent_name: string): string => {
     <body>
     
     <div class="container">
-      <div class="header">Congratulations! Your admission has been confirmed. 🎓</div>
+      <div class="header">Your payment has been confirmed. 🎓</div>
       <div class="content">
         <p>Dear <strong>${parent_name}</strong>,</p>
         <p>Thank you! We’ve successfully received your payment.</p>
