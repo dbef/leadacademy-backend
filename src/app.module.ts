@@ -12,6 +12,7 @@ import { CoursesModule } from './courses/courses.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { CampusModule } from './campus/campus.module';
 import { PaymentModule } from './payment/payment.module';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PaymentModule } from './payment/payment.module';
     GalleryModule,
     CampusModule,
     PaymentModule,
+    NewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

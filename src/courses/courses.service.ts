@@ -127,8 +127,6 @@ export class CoursesService {
       };
     }
 
-    console.log('Where query:', whereQuery);
-
     const allCourses = await this.prisma.course.findMany({
       where: whereQuery,
       orderBy: orderByQuery,
@@ -155,8 +153,6 @@ export class CoursesService {
         },
       },
     });
-
-    console.log('allCourses', allCourses);
 
     return allCourses;
   }

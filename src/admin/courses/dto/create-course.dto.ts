@@ -31,6 +31,11 @@ export class CreateCourseDto {
   @IsNotEmpty()
   description_en: string;
 
+  @ApiProperty({ description: 'language' })
+  @IsString()
+  @IsNotEmpty()
+  language: string;
+
   @ApiProperty({
     description: 'Start date of the course',
     type: String,

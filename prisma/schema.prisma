@@ -59,6 +59,7 @@ model Media {
   files_course_assn FileCourseAssn[]
   campus_media_assn CampusMediaAssn[]
   campus_file_assn  CampusFileAssn[]
+  news_media_assn   NewsMediaAssn[]
 }
 
 model MediaCourseAssn {
@@ -114,17 +115,12 @@ model CourseMedia {
   course          Course   @relation(fields: [course_id], references: [course_id])
 }
 
-model NewsMedia {
-  course_media_id String   @id @default(uuid())
-  news_id         String
-  media_url       String
-  original_name   String
-  location        String
-  type            String
-  position        Int      @default(0)
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
-  news            News     @relation(fields: [news_id], references: [news_id])
+model NewsMediaAssn {
+  news_media_assn_id String @id @default(uuid())
+  news_id            String
+  media_id           String
+  news               News   @relation(fields: [news_id], references: [news_id])
+  media              Media  @relation(fields: [media_id], references: [media_id])
 }
 
 model Admin {
@@ -163,6 +159,7 @@ model Course {
   keywords_en          String?
   start_date           DateTime
   end_date             DateTime
+  language             String @default("eng")
   max_students         Int                  @default(50)
   price                Float                @default(0)
   lecturer_id          String?
@@ -188,19 +185,19 @@ model Order {
 }
 
 model News {
-  news_id        String      @id @default(uuid())
-  title_ka       String
-  title_en       String
-  description_ka String
-  description_en String
-  created_at     DateTime    @default(now())
-  updated_at     DateTime    @updatedAt
-  hashtags       String?
-  short_des_ka   String?
-  short_des_en   String?
-  keywords_ka    String?
-  keywords_en    String?
-  news_media     NewsMedia[]
+  news_id         String          @id @default(uuid())
+  title_ka        String
+  title_en        String
+  description_ka  String
+  description_en  String
+  created_at      DateTime        @default(now())
+  updated_at      DateTime        @updatedAt
+  hashtags        String?
+  short_des_ka    String?
+  short_des_en    String?
+  keywords_ka     String?
+  keywords_en     String?
+  news_media_assn NewsMediaAssn[]
 }
 
 model Application {
