@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGalleryDto } from './dto/create-gallery.dto';
-import { UpdateGalleryDto } from './dto/update-gallery.dto';
 import { GlobalQueryDto } from '../global/global.query';
 import { FileDtoRt } from '../admin/files/dto/file-rt.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { FileDto } from '../admin/files/dto/file.dto';
 
 @Injectable()
 export class GalleryService {
@@ -64,5 +63,17 @@ export class GalleryService {
       count,
       data: allFiles,
     };
+  }
+
+  async coverImages(): Promise<FileDto[]> {
+    const images = await this.prisma.media.findMany({
+      where: {
+        folder: {
+          folder_name: 'Cover',
+        },
+      },
+    });
+
+    return images;
   }
 }
