@@ -1,27 +1,27 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsOptional } from 'class-validator';
 import { FileDto } from '../../files/dto/file.dto';
 
-export class CreateNewsDto {
-  @ApiProperty({ description: 'Title in Georgian' })
+export class UpdateNewsDto {
+  @ApiPropertyOptional({ description: 'Title in Georgian' })
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  title_ka: string;
+  title_ka?: string;
 
-  @ApiProperty({ description: 'Title in English' })
+  @ApiPropertyOptional({ description: 'Title in English' })
   @IsString()
-  @IsNotEmpty()
-  title_en: string;
+  @IsOptional()
+  title_en?: string;
 
-  @ApiProperty({ description: 'Description in Georgian' })
+  @ApiPropertyOptional({ description: 'Description in Georgian' })
   @IsString()
-  @IsNotEmpty()
-  description_ka: string;
+  @IsOptional()
+  description_ka?: string;
 
-  @ApiProperty({ description: 'Description in English' })
+  @ApiPropertyOptional({ description: 'Description in English' })
   @IsString()
-  @IsNotEmpty()
-  description_en: string;
+  @IsOptional()
+  description_en?: string;
 
   @ApiPropertyOptional({
     description: 'Course media',

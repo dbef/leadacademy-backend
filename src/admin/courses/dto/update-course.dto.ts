@@ -30,6 +30,11 @@ export class EditCourseDto {
   @IsOptional()
   description_en?: string;
 
+  @ApiPropertyOptional({ description: 'language' })
+  @IsString()
+  @IsOptional()
+  language?: string;
+
   @ApiPropertyOptional({
     description: 'Start date of the course',
     type: String,
