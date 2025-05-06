@@ -53,4 +53,29 @@ export class NewsService {
 
     return foundedNews;
   }
+
+  async generateUrlId() {
+    const data = await this.prisma.course.findMany();
+
+    for (const course of data) {
+      const url_id = course.title_en
+        .toLowerCase()
+        .normalize('NFKD') // handle special unicode chars
+        .replace(/[^\w\s-]/g, '') // remove all non-word, non-space, non-dash chars
+        .replace(/\s+/g, '-') // replace spaces (and nbsp) with dashes
+        .replace(/-+/g, '-') // collapse multiple dashes
+        .replace(/^-+|-+$/g, '');
+
+      await this.prisma.course.update({
+        where: {
+          course_id: course.course_id,
+        },
+        data: {
+          url_id,
+        },
+      });
+    }
+
+    return 'All doneeeeeeeeeeeeeeeeeeeee';
+  }
 }

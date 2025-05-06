@@ -32,4 +32,6 @@ export class NewsController {
   findOne(@Param('news_id') news_id: string) {
     return this.newsService.findOne(news_id);
   }
+
+
 }

@@ -153,13 +153,14 @@ model Course {
   description_ka       String
   description_en       String
   is_published         Boolean              @default(true)
+  url_id               String               @default("url_id")
   short_des_ka         String?
   short_des_en         String?
   keywords_ka          String?
   keywords_en          String?
   start_date           DateTime
   end_date             DateTime
-  language             String @default("eng")
+  language             String               @default("eng")
   max_students         Int                  @default(50)
   price                Float                @default(0)
   lecturer_id          String?
