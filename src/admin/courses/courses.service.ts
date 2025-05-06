@@ -54,11 +54,20 @@ export class CoursesService {
       }
     }
 
+    const url_id = title_en
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
     const newCourse = await this.prisma.course.create({
       data: {
         description_en,
         description_ka,
         language,
+        url_id,
         end_date: new Date(end_date),
         max_students,
         price,

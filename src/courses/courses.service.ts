@@ -158,9 +158,16 @@ export class CoursesService {
   }
 
   async findOne(id: string): Promise<CourseDto> {
-    const foudedCourse = await this.prisma.course.findUnique({
+    const foudedCourse = await this.prisma.course.findFirst({
       where: {
-        course_id: id,
+        OR: [
+          {
+            course_id: id,
+          },
+          {
+            url_id: id,
+          },
+        ],
         start_date: {
           gte: new Date(),
         },

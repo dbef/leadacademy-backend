@@ -57,6 +57,11 @@ export class CourseDto {
   @IsNotEmpty()
   language: string;
 
+  @ApiProperty({ description: 'URL id' })
+  @IsString()
+  @IsNotEmpty()
+  url_id: string;
+
   @ApiProperty({
     description: 'Start date of the course',
     type: String,
