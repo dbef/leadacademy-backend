@@ -122,16 +122,30 @@ export class PaymentService {
       Authorization: `Bearer ${access_token}`,
     };
 
+    const date1 = new Date(foundedApplication.course.start_date);
+    const date2 = new Date(foundedApplication.course.end_date);
+
+    const diffTime = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
     const body = {
       callback_url: process.env.PAYMENT_CALLBACK_URL,
       external_order_id: foundedApplication.application_id,
       purchase_units: {
         currency: 'GEL',
-        total_amount: Number(foundedApplication.course.price),
+        total_amount:
+          foundedApplication.days_attending !== diffDays
+            ? Number(foundedApplication.course.day_price) *
+              Number(foundedApplication.days_attending)
+            : Number(foundedApplication.course.price),
         basket: [
           {
             quantity: 1,
-            unit_price: Number(foundedApplication.course.price),
+            unit_price:
+              foundedApplication.days_attending !== diffDays
+                ? Number(foundedApplication.course.day_price) *
+                  Number(foundedApplication.days_attending)
+                : Number(foundedApplication.course.price),
             product_id: foundedApplication.application_id,
             image: foundedApplication.course?.course_media[0]?.media_url,
             description: foundedApplication.course.title_en,

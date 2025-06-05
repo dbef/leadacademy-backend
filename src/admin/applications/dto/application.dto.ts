@@ -201,6 +201,12 @@ export class ApplicationDto {
   emergency_contact_phone: string | null;
 
   @ApiProperty({
+    description: 'Days attending',
+    required: false,
+  })
+  days_attending: number | null;
+
+  @ApiProperty({
     description: 'Additional Medical Information',
     required: false,
   })
