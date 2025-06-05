@@ -5,6 +5,9 @@ import {
   IsString,
   IsUUID,
   IsBoolean,
+  IsNumber,
+  IsNotEmpty,
+  IsPositive,
 } from 'class-validator';
 
 export class CreateApplicationDto {
@@ -66,6 +69,12 @@ export class CreateApplicationDto {
   @ApiProperty({ description: 'City' })
   @IsString()
   city: string;
+
+  @ApiProperty({ description: 'Days attending' })
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  days_attending: number;
 
   // Student Info
   @ApiProperty({ description: 'Student First Name' })

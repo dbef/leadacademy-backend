@@ -69,6 +69,10 @@ export class CreateCourseDto {
   @IsPositive()
   price: number;
 
+  @ApiProperty({ description: 'Price of the course', default: 0 })
+  @IsPositive()
+  day_price: number;
+
   @ApiPropertyOptional({ description: 'Lecturer ID' })
   @IsString()
   @IsOptional()

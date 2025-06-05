@@ -160,6 +160,7 @@ model Course {
   keywords_en          String?
   start_date           DateTime
   end_date             DateTime
+  day_price            Float?               @default(450)
   language             String               @default("eng")
   max_students         Int                  @default(50)
   price                Float                @default(0)
@@ -233,6 +234,7 @@ model Application {
   special_needs           String?
   relationship_with_peers String?
   social_skills           String?
+  days_attending          Int?
 
   alergens                String?
   medicaments             String?

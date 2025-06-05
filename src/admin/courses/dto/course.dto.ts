@@ -94,6 +94,11 @@ export class CourseDto {
   @IsOptional()
   price: number = 0;
 
+  @ApiPropertyOptional({ description: 'Price of the course', default: 0 })
+  @IsPositive()
+  @IsOptional()
+  day_price: number = 0;
+
   @ApiPropertyOptional({ description: 'ID of the lecturer', format: 'uuid' })
   @IsUUID()
   @IsOptional()

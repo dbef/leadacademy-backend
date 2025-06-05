@@ -65,6 +65,12 @@ export class EditCourseDto {
   @IsOptional()
   price?: number;
 
+  @ApiPropertyOptional({ description: 'Day Price of the course', default: 0 })
+  @IsPositive()
+  @IsOptional()
+  day_price?: number;
+
+
   @ApiPropertyOptional({ description: 'Lecturer ID' })
   @IsString()
   @IsOptional()

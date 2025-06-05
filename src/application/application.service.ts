@@ -57,6 +57,7 @@ export class ApplicationService {
       social_skills,
       special_needs,
       media_release,
+      days_attending,
     } = createApplicationDto;
 
     if (createApplicationDto.student_email) {
@@ -162,6 +163,7 @@ export class ApplicationService {
         emergency_contact_phone: emergency_contact_phone,
         emergency_relation: emergency_relation,
         relationship_with_peers: relationship_with_peers,
+        days_attending: days_attending,
         social_skills: social_skills,
         special_needs: special_needs,
         course: {
