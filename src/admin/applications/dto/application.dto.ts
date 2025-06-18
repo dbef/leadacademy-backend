@@ -6,7 +6,7 @@ import {
   IsUUID,
   IsBoolean,
 } from 'class-validator';
-import { CourseDto } from '../../courses/dto/course.dto';
+import { CourseDto, CourseOptionsDto } from '../../courses/dto/course.dto';
 
 export class ApplicationDto {
   @ApiProperty({
@@ -240,4 +240,19 @@ export class ApplicationDto {
 
   @ApiPropertyOptional({ description: 'Course', type: CourseDto })
   course?: CourseDto;
+
+  @ApiProperty({
+    description: 'Course Option ID',
+    required: false,
+    type: String,
+  })
+  @IsOptional()
+  @IsString()
+  course_option_id?: string | null;
+
+  @ApiProperty({
+    description: 'Course Option Details',
+    type: CourseOptionsDto,
+  })
+  course_option: CourseOptionsDto;
 }

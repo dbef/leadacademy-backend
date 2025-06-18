@@ -142,6 +142,7 @@ export class CoursesService {
             campus_media_assn: { include: { media: true } },
           },
         },
+        course_options: true,
         _count: {
           select: {
             application: {
@@ -202,6 +203,7 @@ export class CoursesService {
             },
           },
         },
+        course_options: true,
         _count: {
           select: {
             application: {

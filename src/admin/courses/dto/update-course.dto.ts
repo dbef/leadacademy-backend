@@ -8,6 +8,7 @@ import {
   IsBoolean,
 } from 'class-validator';
 import { FileDto } from '../../files/dto/file.dto';
+import { CreateCourseOptionDto } from './create-course.dto';
 
 export class EditCourseDto {
   @ApiPropertyOptional({ description: 'Title in Georgian' })
@@ -70,7 +71,6 @@ export class EditCourseDto {
   @IsOptional()
   day_price?: number;
 
-
   @ApiPropertyOptional({ description: 'Lecturer ID' })
   @IsString()
   @IsOptional()
@@ -129,4 +129,12 @@ export class EditCourseDto {
     type: String,
   })
   campus_id?: string;
+
+  @ApiPropertyOptional({
+    description: 'Course options',
+    type: [CreateCourseOptionDto],
+    required: false,
+  })
+  @IsOptional()
+  course_options?: CreateCourseOptionDto[];
 }

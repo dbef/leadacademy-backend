@@ -17,6 +17,14 @@ export class ApplicationsService {
     return Math.floor(1000000 + Math.random() * 9000000);
   }
 
+  renderCoursePriciing(foundedApplication: any) {
+    if (foundedApplication.course_option_id) {
+      return foundedApplication.course_option.option_price;
+    }
+
+    return foundedApplication.course.price;
+  }
+
   async update(id: string, updateApplicationDto: UpdateApplicationDtoAdmin) {
     const foundedApplication = await this.prisma.application.findUnique({
       where: {
@@ -43,6 +51,7 @@ export class ApplicationsService {
             },
           },
         },
+        course_option: true,
       },
     });
 
@@ -79,7 +88,7 @@ export class ApplicationsService {
         foundedApplication.course.title_en,
         foundedApplication.course.start_date,
         foundedApplication.parent_name,
-        foundedApplication.course.price,
+        this.renderCoursePriciing(foundedApplication),
         foundedApplication.student_name,
         foundedApplication.student_lastname,
       );
@@ -160,6 +169,7 @@ export class ApplicationsService {
             },
           },
         },
+        course_option: true,
       },
       orderBy: {
         created_at: 'desc',
@@ -198,6 +208,7 @@ export class ApplicationsService {
             },
           },
         },
+        course_option: true,
       },
     });
 

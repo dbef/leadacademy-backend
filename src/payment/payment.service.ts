@@ -14,6 +14,7 @@ import { PaymentCallbackResponseDto } from './dto/payment-request.dto';
 import { Response } from 'express';
 import { CourseDto } from '../admin/courses/dto/course.dto';
 import { MailService } from '../mail/mail.service';
+import { ApplicationDto } from '../admin/applications/dto/application.dto';
 
 @Injectable()
 export class PaymentService {
@@ -55,6 +56,14 @@ export class PaymentService {
     return response.data;
   }
 
+  renderCoursePriciing(foundedApplication: any) {
+    if (foundedApplication.course_option_id) {
+      return foundedApplication.course_option.option_price;
+    }
+
+    return foundedApplication.course.price;
+  }
+
   async requestOrder(
     application_id: string,
   ): Promise<PaymentCallbackResponseDto> {
@@ -87,6 +96,7 @@ export class PaymentService {
             },
           },
         },
+        course_option: true,
       },
     });
 
@@ -133,19 +143,11 @@ export class PaymentService {
       external_order_id: foundedApplication.application_id,
       purchase_units: {
         currency: 'GEL',
-        total_amount:
-          foundedApplication.days_attending !== diffDays
-            ? Number(foundedApplication.course.day_price) *
-              Number(foundedApplication.days_attending)
-            : Number(foundedApplication.course.price),
+        total_amount: this.renderCoursePriciing(foundedApplication),
         basket: [
           {
             quantity: 1,
-            unit_price:
-              foundedApplication.days_attending !== diffDays
-                ? Number(foundedApplication.course.day_price) *
-                  Number(foundedApplication.days_attending)
-                : Number(foundedApplication.course.price),
+            unit_price: this.renderCoursePriciing(foundedApplication),
             product_id: foundedApplication.application_id,
             image: foundedApplication.course?.course_media[0]?.media_url,
             description: foundedApplication.course.title_en,
@@ -254,6 +256,7 @@ export class PaymentService {
                 campus_media_assn: { include: { media: true } },
               },
             },
+            course_options: true,
             _count: {
               select: {
                 application: {

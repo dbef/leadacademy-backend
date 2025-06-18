@@ -22,6 +22,66 @@ export class ApplicationsCount {
   application: number;
 }
 
+export class CourseOptionsDto {
+  @ApiProperty({
+    description: 'Unique ID of the course option',
+    format: 'uuid',
+    type: String,
+  })
+  @IsUUID()
+  @IsNotEmpty()
+  course_options_id: string;
+
+  @ApiProperty({
+    description: 'Start date of the course option',
+    type: String,
+    format: 'date-time',
+  })
+  @IsDate()
+  @IsNotEmpty()
+  start_date: Date;
+
+  @ApiProperty({
+    description: 'End date of the course option',
+    type: String,
+    format: 'date-time',
+  })
+  @IsDate()
+  @IsNotEmpty()
+  end_date: Date;
+
+  @ApiProperty({ description: 'Price of the course option', default: 0 })
+  @IsPositive()
+  @IsNotEmpty()
+  option_price: number;
+
+  @ApiPropertyOptional({
+    description: 'ID of the course this option belongs to',
+    format: 'uuid',
+  })
+  @IsUUID()
+  @IsOptional()
+  course_id?: string;
+
+  @ApiProperty({
+    description: 'End date of the course option',
+    type: String,
+    format: 'date-time',
+  })
+  @IsDate()
+  @IsNotEmpty()
+  created_at: Date;
+
+  @ApiProperty({
+    description: 'End date of the course option',
+    type: String,
+    format: 'date-time',
+  })
+  @IsDate()
+  @IsNotEmpty()
+  updated_at: Date;
+}
+
 export class CourseDto {
   @ApiProperty({ description: 'Unique ID of the course', format: 'uuid' })
   @IsUUID()
@@ -181,4 +241,10 @@ export class CourseDto {
     type: CampusDto,
   })
   campuse?: CampusDto;
+
+  @ApiPropertyOptional({
+    description: 'List of course options',
+    type: [CourseOptionsDto],
+  })
+  course_options?: CourseOptionsDto[];
 }

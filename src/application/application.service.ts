@@ -58,6 +58,7 @@ export class ApplicationService {
       special_needs,
       media_release,
       days_attending,
+      course_option_id,
     } = createApplicationDto;
 
     if (createApplicationDto.student_email) {
@@ -157,6 +158,12 @@ export class ApplicationService {
         student_name: student_name,
         student_phone: student_phone,
         student_pn: student_pn,
+        course_option:
+          course_option_id === 'default'
+            ? undefined
+            : {
+                connect: { course_options_id: course_option_id },
+              },
         media_release: media_release,
         additional_comfort_info: additional_comfort_info,
         emergency_contact_name: emergency_contact_name,

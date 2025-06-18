@@ -10,6 +10,26 @@ import {
 } from 'class-validator';
 import { FileDto } from '../../files/dto/file.dto';
 
+export class CreateCourseOptionDto {
+  @ApiProperty({
+    description: 'Start date of the course',
+    type: String,
+  })
+  @IsNotEmpty()
+  start_date: string;
+
+  @ApiProperty({
+    description: 'End date of the course',
+    type: String,
+  })
+  @IsNotEmpty()
+  end_date: string;
+
+  @ApiProperty({ description: 'Price of the course', default: 0 })
+  @IsPositive()
+  option_price: number;
+}
+
 export class CreateCourseDto {
   @ApiProperty({ description: 'Title in Georgian' })
   @IsString()
@@ -127,4 +147,12 @@ export class CreateCourseDto {
     type: String,
   })
   short_des_ka?: string;
+
+  @ApiPropertyOptional({
+    description: 'Course options',
+    type: [CreateCourseOptionDto],
+    required: false,
+  })
+  @IsOptional()
+  course_options?: CreateCourseOptionDto[];
 }
