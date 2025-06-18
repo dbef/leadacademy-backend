@@ -213,4 +213,12 @@ export class CreateApplicationDto {
   @ApiProperty({ description: 'Terms and Conditions Agreement' })
   @IsBoolean()
   terms_and_conditions: boolean;
+
+  @ApiProperty({
+    description: 'Course Option ID',
+    required: false,
+    type: String,
+  })
+  @IsString()
+  course_option_id: string;
 }

@@ -41,6 +41,7 @@ export class CoursesService {
       is_published,
       day_price,
       short_des_ka,
+      course_options,
     } = createCourseDto;
 
     if (lecturer_id) {
@@ -85,6 +86,19 @@ export class CoursesService {
         lecturer_id: lecturer_id ? lecturer_id : null,
       },
     });
+
+    if (course_options) {
+      const courseOptions = course_options.map((option) => {
+        return {
+          ...option,
+          course_id: newCourse.course_id,
+        };
+      });
+
+      await this.prisma.courseOptions.createMany({
+        data: courseOptions,
+      });
+    }
 
     if (lecturers) {
       const refactoredLecturers = lecturers.map((lecturer) => {
@@ -172,6 +186,7 @@ export class CoursesService {
       short_des_ka,
       is_published,
       day_price,
+      course_options,
     } = data;
 
     const course = await this.prisma.course.findUnique({
@@ -208,6 +223,33 @@ export class CoursesService {
         lecturer_id: lecturer_id ? lecturer_id : null,
       },
     });
+
+    if (course_options.length > 0) {
+      await this.prisma.courseOptions.deleteMany({
+        where: {
+          course_id,
+        },
+      });
+
+      const refactoredCourseOptions = course_options.map((option) => {
+        return {
+          ...option,
+          course_id,
+        };
+      });
+
+      await this.prisma.courseOptions.createMany({
+        data: [...refactoredCourseOptions],
+      });
+    }
+
+    if (course_options.length < 1) {
+      await this.prisma.courseOptions.deleteMany({
+        where: {
+          course_id,
+        },
+      });
+    }
 
     if (course_files.length > 0) {
       await this.prisma.fileCourseAssn.deleteMany({
@@ -348,6 +390,12 @@ export class CoursesService {
       },
     });
 
+    await this.prisma.courseOptions.deleteMany({
+      where: {
+        course_id,
+      },
+    });
+
     await this.prisma.course.delete({
       where: {
         course_id,
@@ -394,6 +442,7 @@ export class CoursesService {
             },
           },
         },
+        course_options: true,
       },
     });
 
