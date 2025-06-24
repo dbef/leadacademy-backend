@@ -16,11 +16,6 @@ export class GalleryService {
         OR: [
           {
             folder: {
-              folder_name: 'CourseMedia',
-            },
-          },
-          {
-            folder: {
               folder_name: 'Gallery',
             },
           },
@@ -42,11 +37,6 @@ export class GalleryService {
     const count = await this.prisma.media.count({
       where: {
         OR: [
-          {
-            folder: {
-              folder_name: 'CourseMedia',
-            },
-          },
           {
             folder: {
               folder_name: 'Gallery',
