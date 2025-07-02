@@ -34,9 +34,16 @@ export class NewsService {
   }
 
   async findOne(news_id: string): Promise<NewsDto> {
-    const foundedNews = this.prisma.news.findUnique({
+    const foundedNews = this.prisma.news.findFirst({
       where: {
-        news_id,
+        OR: [
+          {
+            news_id: news_id,
+          },
+          {
+            url_id: news_id,
+          },
+        ],
       },
       include: {
         news_media_assn: {
@@ -55,7 +62,7 @@ export class NewsService {
   }
 
   async generateUrlId() {
-    const data = await this.prisma.course.findMany();
+    const data = await this.prisma.news.findMany();
 
     for (const course of data) {
       const url_id = course.title_en
@@ -66,9 +73,9 @@ export class NewsService {
         .replace(/-+/g, '-') // collapse multiple dashes
         .replace(/^-+|-+$/g, '');
 
-      await this.prisma.course.update({
+      await this.prisma.news.update({
         where: {
-          course_id: course.course_id,
+          news_id: course.news_id,
         },
         data: {
           url_id,

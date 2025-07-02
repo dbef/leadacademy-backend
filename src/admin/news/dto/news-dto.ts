@@ -27,6 +27,10 @@ export class NewsDto {
   @IsString()
   description_en: string;
 
+  @ApiProperty()
+  @IsString()
+  url_id: string;
+
   @ApiPropertyOptional({
     description: 'Creation timestamp (auto-filled by server if omitted)',
   })

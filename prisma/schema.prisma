@@ -203,6 +203,7 @@ model News {
   news_id         String          @id @default(uuid())
   title_ka        String
   title_en        String
+  url_id          String          @default("url_id")
   description_ka  String
   description_en  String
   created_at      DateTime        @default(now())

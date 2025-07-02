@@ -26,6 +26,14 @@ export class NewsService {
       short_des_ka,
     } = createNewsDto;
 
+    const url_id = title_en
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
     const newNews = await this.prisma.news.create({
       data: {
         description_en,
@@ -34,6 +42,7 @@ export class NewsService {
         title_ka,
         short_des_en: short_des_en ? short_des_en : null,
         short_des_ka: short_des_ka ? short_des_ka : null,
+        url_id: url_id,
         keywords_en: keywords_en ? keywords_en : null,
         hashtags: hash_tags ? hash_tags : null,
         keywords_ka: keywords_ka ? keywords_ka : null,

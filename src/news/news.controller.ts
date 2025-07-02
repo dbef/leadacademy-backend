@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Query } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { GlobalQueryDto } from '../global/global.query';
 import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
@@ -9,6 +9,11 @@ import { NewsDto } from '../admin/news/dto/news-dto';
 @ApiTags('News')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
+
+  // @Patch('generate/generate-url-id')
+  // generateUrl() {
+  //   return this.newsService.generateUrlId();
+  // }
 
   @Get()
   @ApiOkResponse({
@@ -32,6 +37,4 @@ export class NewsController {
   findOne(@Param('news_id') news_id: string) {
     return this.newsService.findOne(news_id);
   }
-
-
 }
