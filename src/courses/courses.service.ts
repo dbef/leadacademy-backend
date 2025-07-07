@@ -176,9 +176,6 @@ export class CoursesService {
             url_id: id,
           },
         ],
-        start_date: {
-          gte: new Date(),
-        },
       },
       include: {
         files_course_assn: {
