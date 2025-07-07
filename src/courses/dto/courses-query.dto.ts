@@ -74,4 +74,11 @@ export class CoursesQuery {
   @IsOptional()
   @IsEnum(Direction)
   direction?: Direction;
+
+  @ApiPropertyOptional({
+    description: 'Direction of sorting',
+    example: 'asc',
+  })
+  @IsOptional()
+  status?: string;
 }
