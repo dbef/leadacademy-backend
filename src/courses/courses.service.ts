@@ -57,6 +57,7 @@ export class CoursesService {
       searchText,
       is_published,
       sortBy,
+      status,
     } = query;
 
     const whereQuery: any = {
@@ -85,6 +86,12 @@ export class CoursesService {
     if (location) {
       whereQuery.campuse = {
         campus_name_short: location,
+      };
+    }
+
+    if (status) {
+      whereQuery.start_date = {
+        lte: new Date(),
       };
     }
 
