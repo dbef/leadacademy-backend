@@ -42,6 +42,7 @@ export class CoursesService {
       day_price,
       short_des_ka,
       course_options,
+      registration_url,
     } = createCourseDto;
 
     if (lecturer_id) {
@@ -84,6 +85,7 @@ export class CoursesService {
         keywords_en: keywords_en ? keywords_en : null,
         keywords_ka: keywords_ka ? keywords_ka : null,
         lecturer_id: lecturer_id ? lecturer_id : null,
+        registration_url: registration_url ? registration_url : null,
       },
     });
 
@@ -187,6 +189,7 @@ export class CoursesService {
       is_published,
       day_price,
       course_options,
+      registration_url,
     } = data;
 
     const course = await this.prisma.course.findUnique({
@@ -221,6 +224,7 @@ export class CoursesService {
         keywords_en: keywords_en ? keywords_en : null,
         keywords_ka: keywords_ka ? keywords_ka : null,
         lecturer_id: lecturer_id ? lecturer_id : null,
+        registration_url: registration_url ? registration_url : null
       },
     });
 

@@ -134,6 +134,12 @@ export class CreateCourseDto {
     description: 'kewords ka',
     type: String,
   })
+  registration_url?: string;
+
+  @ApiPropertyOptional({
+    description: 'kewords ka',
+    type: String,
+  })
   keywords_en?: string;
 
   @ApiPropertyOptional({

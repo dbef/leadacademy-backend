@@ -222,6 +222,12 @@ export class CourseDto {
     description: 'kewords ka',
     type: String,
   })
+  registration_url?: string;
+
+  @ApiPropertyOptional({
+    description: 'kewords ka',
+    type: String,
+  })
   short_des_en?: string;
 
   @ApiPropertyOptional({

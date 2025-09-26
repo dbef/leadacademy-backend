@@ -161,6 +161,7 @@ model Course {
   start_date           DateTime
   end_date             DateTime
   day_price            Float?               @default(450)
+  registration_url     String?
   language             String               @default("eng")
   max_students         Int                  @default(50)
   price                Float                @default(0)
