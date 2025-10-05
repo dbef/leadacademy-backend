@@ -59,6 +59,7 @@ export class ApplicationService {
       media_release,
       days_attending,
       course_option_id,
+      school,
     } = createApplicationDto;
 
     if (createApplicationDto.student_email) {
@@ -155,6 +156,7 @@ export class ApplicationService {
         student_dob: student_dob,
         student_email: student_email,
         student_lastname: student_lastname,
+        school: school ? school : null,
         student_name: student_name,
         student_phone: student_phone,
         student_pn: student_pn,
