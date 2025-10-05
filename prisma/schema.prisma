@@ -247,6 +247,7 @@ model Application {
   student_dob             String
   student_gender          String
   program                 String
+  school                  String?
   potential_roommate      String?
   special_needs           String?
   relationship_with_peers String?

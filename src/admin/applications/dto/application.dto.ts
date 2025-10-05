@@ -54,6 +54,11 @@ export class ApplicationDto {
   @IsOptional()
   relation?: string;
 
+  @ApiProperty({ description: 'Relationship to Student', default: 'parent' })
+  @IsString()
+  @IsOptional()
+  school?: string;
+
   @ApiProperty({ description: 'Parent Date of Birth' })
   @IsString()
   parent_dob: string;

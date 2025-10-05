@@ -109,6 +109,10 @@ export class CreateApplicationDto {
   @IsString()
   program: string;
 
+  @ApiProperty({ description: 'Educational Program' })
+  @IsString()
+  school: string | null;
+
   @ApiProperty({ description: 'Potential Roommate' })
   @IsOptional()
   @IsString()
